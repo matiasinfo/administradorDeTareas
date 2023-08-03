@@ -1,31 +1,24 @@
 package ar.edu.unlp.info.oo1.ManejadorDeTareas;
-
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 
 import java.time.LocalDate;
-import java.time.Period;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-/*import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
-import java.time.LocalDateTime;
-import java.time.Duration;
-*/
+import java.time.Period;
+@JsonIgnoreProperties(ignoreUnknown = true)
 class Tarea {
-    private static int nextId = 1;
-    private int id;
-    private String description;
+
+	private String description;
     private boolean estado;
     private int prioridad;
-    @JsonProperty("fecha")
     private LocalDate fechaVencimiento;
 
     public Tarea(String description, int p, LocalDate vencimiento ) {
         this.description = description;
         this.estado = false;
         this.prioridad = p;
-        this.fechaVencimiento = vencimiento;
-        this.id = nextId++;    
+        this.fechaVencimiento = vencimiento;  
+        
     }
     
     public Tarea() {
@@ -33,9 +26,6 @@ class Tarea {
     }
     
     
-    public int getId() {
-        return id;
-    }
     public String getDescription() {
         return description;
     }

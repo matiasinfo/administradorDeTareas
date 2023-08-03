@@ -1,36 +1,29 @@
 [ {
-  "id" : 1,
   "description" : "comprar",
   "prioridad" : 1,
-  "fecha" : [ 2023, 8, 12 ]
+  "fecha" : null
 }, {
-  "id" : 2,
   "description" : "comer",
   "prioridad" : 2,
-  "fecha" : [ 2023, 8, 18 ]
+  "fecha" : null
 }, {
-  "id" : 3,
-  "description" : "jufar",
+  "description" : "jugar",
   "prioridad" : 3,
-  "fecha" : [ 2023, 8, 4 ]
+  "fecha" : null
 }, {
-  "id" : 4,
   "description" : "limpiar",
   "prioridad" : 3,
-  "fecha" : [ 2023, 8, 17 ]
+  "fecha" : null
 }, {
-  "id" : 5,
   "description" : "ordenar",
   "prioridad" : 1,
-  "fecha" : [ 2023, 8, 22 ]
+  "fecha" : null
 }, {
-  "id" : 1,
   "description" : "ir al examen del lunes",
   "prioridad" : 3,
-  "fecha" : [ 2023, 8, 8 ]
+  "fecha" : null
 }, {
-  "id" : 1,
   "description" : "dormir",
   "prioridad" : 2,
-  "fecha" : [ 2023, 8, 4 ]
+  "fecha" : null
 } ]

@@ -61,12 +61,12 @@ class Categoria {
    
     public void imprimirTareas() {
         System.out.println("Lista de tareas:");
-        tareas.forEach(task -> System.out.println(task.getId() + ". " + task.getDescription() + " - " + (task.estado() ? "Hecha" : "Pendiente")+ " - " + " prioridad: " + task.getPrioridad()));
+        tareas.forEach(task -> System.out.println(tareas.indexOf(task)+1+ ". " + task.getDescription() + " - " + (task.estado() ? "Hecha" : "Pendiente")+ " - " + " prioridad: " + task.getPrioridad()));
     }
 
     public Tarea buscarTareaPorId(int id) {
         return tareas.stream()
-                .filter(tarea -> tarea.getId() == id)
+                .filter(tarea -> tareas.indexOf(tarea) == id -1 )
                 .findFirst()
                 .orElse(null); // Retorna null si no se encuentra la tarea con el id especificado
     }
