@@ -4,15 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-class ManejadorDeCategorias {
+class Usuario {
     private List<Categoria> categorias;
+    private String name;
+    private String pasword;
     private Scanner scanner;
 
-    public ManejadorDeCategorias() {
+    public Usuario(String name, String pasword) {
         this.categorias = new ArrayList<>();
+        this.name = name;
+        this.pasword = pasword;
         this.scanner = new Scanner(System.in);
     }
-
+    
+    public String getName() {
+    	return name;
+    }
+    public String getPasword() {
+    	return pasword;
+    }
+    
     public void agregarCategoria(String description) {
         Categoria nueva = new Categoria(description);
         categorias.add(nueva);
@@ -37,10 +48,11 @@ class ManejadorDeCategorias {
 
     public void modificarCategoria(int index) {
         if (index >= 0 && index < categorias.size()) {
-            categorias.get(index).run();
+            MenuManejadorDeTareas menu = new MenuManejadorDeTareas (categorias.get(index));
+            menu.run();
             ;
         } else {
-            System.out.println("Índice de t1area inválido.");
+            System.out.println("Índice de tarea inválido.");
         }
     }
 
@@ -94,7 +106,7 @@ class ManejadorDeCategorias {
     }
 
     public static void main(String[] args) {
-        ManejadorDeCategorias taskManager = new ManejadorDeCategorias();
+        Usuario taskManager = new Usuario("matias","123456");
         taskManager.run();
     }
 }

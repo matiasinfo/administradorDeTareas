@@ -21,11 +21,16 @@
 }, {
   "id" : 5,
   "description" : "ordenar",
-  "prioridad" : 2,
+  "prioridad" : 1,
   "fecha" : [ 2023, 8, 22 ]
 }, {
   "id" : 1,
   "description" : "ir al examen del lunes",
   "prioridad" : 3,
   "fecha" : [ 2023, 8, 8 ]
+}, {
+  "id" : 1,
+  "description" : "dormir",
+  "prioridad" : 2,
+  "fecha" : [ 2023, 8, 4 ]
 } ]
