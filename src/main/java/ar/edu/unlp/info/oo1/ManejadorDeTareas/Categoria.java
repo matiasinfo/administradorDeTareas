@@ -1,26 +1,29 @@
 package ar.edu.unlp.info.oo1.ManejadorDeTareas;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.Comparator;
 
-// podria genera una variable de tipo lista que valla conteniendo el id para la proxima tarea 
 class Categoria {
     private String nombre;
     private List<Tarea> tareas;
 
-    public Categoria(String n) {
-        this.nombre = n;
+    @JsonCreator
+    public Categoria(@JsonProperty("nombre") String nombre) {
+        this.nombre = nombre;
         this.tareas = new ArrayList<>();
-    }
+        }
+    
     public Categoria(String nombre, List<Tarea> tareas) {
     	this.nombre = nombre;
     	this.tareas = tareas;
     }
-
-    
+      
     public String getNombre(){
         return this.nombre;
     }
@@ -29,8 +32,7 @@ class Categoria {
         return this.tareas;
     }
 
-    public void agregarTarea(String description, int prioridad, LocalDate fecha) {
-        Tarea task = new Tarea(description, prioridad,fecha);
+    public void agregarTarea(Tarea task) {
         tareas.add(task);
     }
 
@@ -44,7 +46,7 @@ class Categoria {
     
     public void camabiarPrioridad(Tarea tarea, int p) {
         if (tareas.contains(tarea)) {
-            tarea.camabiarPrioridad(p);
+            tarea.cambiarPrioridad(p);
         } else {
             System.out.println("Tarea no encontrada.");
         }
@@ -61,7 +63,7 @@ class Categoria {
    
     public void imprimirTareas() {
         System.out.println("Lista de tareas:");
-        tareas.forEach(task -> System.out.println(tareas.indexOf(task)+1+ ". " + task.getDescription() + " - " + (task.estado() ? "Hecha" : "Pendiente")+ " - " + " prioridad: " + task.getPrioridad()));
+        tareas.forEach(task -> System.out.println(tareas.indexOf(task)+1+ ". " + task.getDescription() + " - " + (task.estado() ? "Hecha" : "Pendiente")+ " - " + " prioridad: " + task.getPrioridad()+" - Fecha "+task.getFechaVencimiento()));
     }
 
     public Tarea buscarTareaPorId(int id) {
@@ -80,5 +82,13 @@ class Categoria {
 
         listaOrdenada.forEach(task -> System.out.println(". " + task.getDescription() + " - " + (task.estado() ? "Hecha" : "Pendiente")+ " - " + " prioridad: " + task.getPrioridad()));
     }
+    public List<Tarea> proximosYVencidos() {
+    	
+    	System.out.println("Las Siguientes taras estan por vencer");
+    	return tareas.stream()
+    			.filter(tarea -> tarea.cantidadDeDias() <= 5)
+    			.collect(Collectors.toList());
+    }
+   
     
 }

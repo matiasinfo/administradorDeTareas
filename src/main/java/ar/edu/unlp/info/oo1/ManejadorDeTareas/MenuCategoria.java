@@ -1,75 +1,30 @@
 package ar.edu.unlp.info.oo1.ManejadorDeTareas;
 
-import java.io.File;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
+//import java.time.LocalDate;
+//import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.databind.type.CollectionType;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
-
-
-public class MenuManejadorDeTareas {
+public class MenuCategoria{
 	
 	private Scanner scanner;
 	private Categoria categoria;
 	
-	public MenuManejadorDeTareas(Categoria cat) {
+	public MenuCategoria(Categoria cat) {
 		this.scanner = new Scanner(System.in);
 		this.categoria = cat;
 	}
-	
-	
-	public void guardarEnArchivo(String nombreArchivo) {
-	    	ObjectMapper objectMapper = new ObjectMapper();
-	    	objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
-	    	objectMapper.registerModule(new JavaTimeModule());
-
-	        try {
-	            File archivo = new File(nombreArchivo);
-	            objectMapper.writeValue(archivo, categoria.getTareas());
-	            System.out.println("Información guardada en el archivo: " + nombreArchivo);
-	        } catch (IOException e) {
-	            System.out.println("Error al guardar la información en el archivo: " + e.getMessage());
-	        }
-	    }
-
-	    // Método para cargar la información de las categorías y tareas desde un archivo JSON
-	    public void cargarDesdeArchivo(String nombreArchivo) {
-	        ObjectMapper objectMapper = new ObjectMapper();
-	        objectMapper.registerModule(new JavaTimeModule());
-	        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-	        objectMapper.setDateFormat(dateFormat);
-
-	        try {
-	            File archivo = new File(nombreArchivo);
-	            CollectionType tipoListaTareas = objectMapper.getTypeFactory().constructCollectionType(ArrayList.class, Tarea.class);
-	            List<Tarea> tareas = objectMapper.readValue(archivo, tipoListaTareas);
-	            categoria = new Categoria(categoria.getNombre(),tareas);
-	            System.out.println("Información cargada desde el archivo: " + nombreArchivo);
-	        } catch (IOException e) {
-	            System.out.println("Error al cargar la información desde el archivo: " + e.getMessage());
-	        }
-	    }
-	    
 	    
 	    public void agregarNuevaTarea() {
-	        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	        //DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 	        System.out.print("Descripción de la tarea: ");
 	        String description = scanner.nextLine();
 	        System.out.print("Nivel de prioridad: ");
 	        int priority = scanner.nextInt();
 	        System.out.println("Ingrese la fecha (formato: yyyy-MM-dd):");
 	        scanner.nextLine();
-	        String fechaInput = scanner.nextLine();
-	        LocalDate fechaVencimiento = LocalDate.parse(fechaInput, formatter);
-	        categoria.agregarTarea(description, priority, fechaVencimiento);
+	        String fechaVencimiento = scanner.nextLine();
+	       // LocalDate fechaVencimiento = LocalDate.parse(fechaInput, formatter);
+	        categoria.agregarTarea(new Tarea(description, priority, fechaVencimiento));
 	        System.out.println("Tarea agregada.");
 	    }
 	    
@@ -92,7 +47,7 @@ public class MenuManejadorDeTareas {
 	    
 
 	    private void cambiarNivelDePrioridad() {
-	    	System.out.print("\u00CDndique el numero de la tarea a modificar su nivel prioridad: ");
+	    	System.out.print("Indique el numero de la tarea a modificar su nivel prioridad: ");
 	    	int tareaModificarId = scanner.nextInt();
 	    	scanner.nextLine();
 	    	System.out.print("Índique nuevo nivel de prioridad del 1 al 3: ");
@@ -101,10 +56,10 @@ public class MenuManejadorDeTareas {
 	    	categoria.camabiarPrioridad(categoria.buscarTareaPorId(tareaModificarId), priori);
 
 	    	}
-
-
-	
-	
+	    public void imprimirProximos() {
+	    	categoria.proximosYVencidos().forEach(tarea -> System.out.println(tarea.toString()) );
+	        ;
+	    }
 	
 	public void run() {
         int option;
@@ -116,9 +71,7 @@ public class MenuManejadorDeTareas {
             System.out.println("4. Modificar Nivel de Prioridad");
             System.out.println("5. Mostrar tareas");
             System.out.println("6. Imprimir la de tareas por nivel de prioridad");
-            System.out.println("7. Guardar en  Archivo");
-            System.out.println("8. Cargar el  Archivo");
-            
+            System.out.println("7. imprimir proximos a vencer"); 
             System.out.println("0. Salir");
             System.out.print("Opción: ");
             option = scanner.nextInt();
@@ -145,10 +98,7 @@ public class MenuManejadorDeTareas {
                     categoria.imprimirPorPrioridad();
                     break;
                 case 7:
-                	guardarEnArchivo(categoria.getNombre()+".json");
-                    break;
-                case 8:
-                	cargarDesdeArchivo(categoria.getNombre()+".json");
+                	imprimirProximos();
                     break;
                 case 0:
                     System.out.println("¡Hasta luego!");
@@ -161,7 +111,7 @@ public class MenuManejadorDeTareas {
 }
 	 public static void main(String[] args) {
 	        Categoria nueva = new Categoria("Facultad");
-	        MenuManejadorDeTareas menu = new MenuManejadorDeTareas(nueva); 
+	        MenuCategoria menu = new MenuCategoria(nueva); 
 	        menu.run();
 	    }
 }

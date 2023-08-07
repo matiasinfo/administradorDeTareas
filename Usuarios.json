@@ -1,0 +1,43 @@
+[ {
+  "name" : "matias",
+  "pasword" : "contraseña1234",
+  "categorias" : [ {
+    "nombre" : "Facultad",
+    "tareas" : [ {
+      "description" : "comprar fotocopia",
+      "prioridad" : 2,
+      "fechaVencimiento" : "2023-08-10"
+    }, {
+      "description" : "comer",
+      "prioridad" : 2,
+      "fechaVencimiento" : "2023-08-08"
+    } ]
+  }, {
+    "nombre" : "trabajo",
+    "tareas" : [ ]
+  }, {
+    "nombre" : "Deportes",
+    "tareas" : [ ]
+  }, {
+    "nombre" : "trabajo",
+    "tareas" : [ ]
+  } ]
+}, {
+  "name" : "santino",
+  "pasword" : "contraseña1234",
+  "categorias" : [ {
+    "nombre" : "Escuela",
+    "tareas" : [ ]
+  }, {
+    "nombre" : "Basquet",
+    "tareas" : [ {
+      "description" : "comprar zapatillas",
+      "prioridad" : 2,
+      "fechaVencimiento" : "2023-08-10"
+    }, {
+      "description" : "ir a entrenar",
+      "prioridad" : 2,
+      "fechaVencimiento" : "2023-08-08"
+    } ]
+  } ]
+} ]
